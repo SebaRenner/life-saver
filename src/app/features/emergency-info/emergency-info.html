@@ -1,1 +1,5 @@
-<p>emergency-info works!</p>
+<h1>Emergency Info of Jane Doe</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <app-blood-type formControlName="bloodType" />
+    <button matButton="filled" type="submit">Save</button>
+</form>
