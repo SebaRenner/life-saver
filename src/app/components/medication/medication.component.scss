@@ -1,8 +1,8 @@
 form {
-    display: grid;
-    grid-template-columns: 2fr 1fr auto;
-    gap: 1rem;
-    align-items: baseline;
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
 }
 
 .mandatory-fields {
@@ -13,5 +13,5 @@ form {
 }
 
 textarea {
-    resize: none;
+  resize: none;
 }
