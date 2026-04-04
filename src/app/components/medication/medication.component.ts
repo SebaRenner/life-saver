@@ -13,6 +13,7 @@ import { MatButton } from '@angular/material/button';
 })
 export class MedicationComponent {
   private readonly fb = inject(FormBuilder);
+  protected readonly maxReasonLength = 120;
 
   addMedication = output<Medication>();
 
@@ -21,7 +22,7 @@ export class MedicationComponent {
     dosage: [null, Validators.required],
     unit: [null, Validators.required],
     frequency: [null, Validators.required],
-    reason: [null],
+    reason: [null, Validators.maxLength(this.maxReasonLength)],
   });
 
   onSubmit(): void {
