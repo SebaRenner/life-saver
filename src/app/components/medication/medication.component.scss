@@ -1,5 +1,17 @@
 form {
     display: flex;
     flex-direction: row;
-    gap: 1rem;;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.mandatory-fields {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+textarea {
+    resize: none;
 }
