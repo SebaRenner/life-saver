@@ -6,10 +6,7 @@ import { BloodType } from '../../models/blood-type.model';
 
 @Component({
   selector: 'app-blood-type',
-  imports: [
-    MatFormFieldModule,
-    MatSelectModule
-  ],
+  imports: [MatFormFieldModule, MatSelectModule],
   templateUrl: './blood-type.component.html',
   styleUrl: './blood-type.component.scss',
   providers: [
@@ -17,7 +14,7 @@ import { BloodType } from '../../models/blood-type.model';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => BloodTypeComponent),
       multi: true,
-    }
+    },
   ],
 })
 export class BloodTypeComponent implements ControlValueAccessor {
@@ -36,15 +33,15 @@ export class BloodTypeComponent implements ControlValueAccessor {
   writeValue(value: BloodType | null): void {
     this.value = value ?? null;
   }
- 
+
   registerOnChange(fn: (value: BloodType | null) => void): void {
-      this.onChange = fn;
+    this.onChange = fn;
   }
- 
+
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-  
+
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
