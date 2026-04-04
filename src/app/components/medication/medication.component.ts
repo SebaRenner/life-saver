@@ -27,7 +27,9 @@ export class MedicationComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
+      const medication = this.form.value as unknown as Medication;
+      this.addMedication.emit(medication);
+      this.form.disable();
     }
   }
 }

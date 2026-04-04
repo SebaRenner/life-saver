@@ -23,10 +23,16 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Reason</mat-label>
-    <textarea matInput formControlName="reason" rows="3" [maxlength]="maxReasonLength" placeholder="Why are you taking this medication?"></textarea>
+    <textarea 
+      matInput 
+      formControlName="reason" 
+      rows="1" 
+      [maxlength]="maxReasonLength" 
+      placeholder="Why are you taking this medication?">
+    </textarea>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+  <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || form.disabled">
     Add medication
   </button>
 </form>
