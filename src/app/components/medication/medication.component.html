@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Medication name</mat-label>
+    <input matInput formControlName="name" placeholder="Enter medication name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="flex-1">
+    <mat-label>Dosage</mat-label>
+    <input matInput type="number" formControlName="dosage" placeholder="e.g. 50" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="flex-1">
+    <mat-label>Unit</mat-label>
+    <input matInput formControlName="unit" placeholder="e.g. mg" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Frequency</mat-label>
+    <input matInput formControlName="frequency" placeholder="e.g. Twice a day" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Reason</mat-label>
+    <textarea matInput formControlName="reason" rows="3" placeholder="Why are you taking this medication?"></textarea>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+    Add medication
+  </button>
+</form>

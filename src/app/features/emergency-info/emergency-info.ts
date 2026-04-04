@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { BloodTypeComponent } from '../../components/blood-type/blood-type.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
+import { MedicationComponent } from '../../components/medication/medication.component';
 
 @Component({
   selector: 'app-emergency-info',
-  imports: [ReactiveFormsModule, BloodTypeComponent, MatButton],
+  imports: [ReactiveFormsModule, BloodTypeComponent, MatButton, MedicationComponent],
   templateUrl: './emergency-info.html',
   styleUrl: './emergency-info.scss',
 })

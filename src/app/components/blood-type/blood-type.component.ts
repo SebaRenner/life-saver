@@ -7,7 +7,6 @@ import { BloodType } from '../../models/blood-type.model';
 @Component({
   selector: 'app-blood-type',
   imports: [
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule
   ],
