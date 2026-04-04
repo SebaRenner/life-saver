@@ -1,13 +1,13 @@
 form {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
     gap: 1rem;
-    align-items: flex-start;
+    align-items: baseline;
 }
 
 .mandatory-fields {
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
   gap: 1rem;
   align-items: center;
 }
