@@ -5,8 +5,8 @@ import QRCode, { BitMatrix } from 'qrcode';
   providedIn: 'root',
 })
 export class QrCodeService {
-  async generateQrCode(data: string): Promise<boolean[][]> {
-    const qr = await QRCode.create(data, { errorCorrectionLevel: 'H' });
+  generateQrCode(data: string): boolean[][] {
+    const qr = QRCode.create(data, { errorCorrectionLevel: 'H' });
     const bitMatrix: BitMatrix = qr.modules;
 
     const size = bitMatrix.size;
