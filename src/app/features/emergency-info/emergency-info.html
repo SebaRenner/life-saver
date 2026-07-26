@@ -7,6 +7,9 @@
   @for (row of medicationRows; track row) {
   <app-medication (addMedication)="onMedicationAdded($event)" />
   }
-
-  <button matButton="filled" type="submit">Save</button>
+  
+  <div class="actions">
+    <button matButton="filled" type="submit">Save</button>
+    <button matButton="outlined" type="button" (click)="onExportStl()">Export STL</button>
+  </div>
 </form>

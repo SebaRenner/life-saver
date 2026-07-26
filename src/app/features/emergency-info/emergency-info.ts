@@ -4,6 +4,9 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular
 import { MatButton } from '@angular/material/button';
 import { MedicationComponent } from '../../components/medication/medication.component';
 import { Medication } from '../../models/medication.model';
+import { QrCodeService } from '../../services/qr-code.service';
+import { StlService } from '../../services/stl.service';
+import { downloadBlob } from '../../utils/download.utils';
 
 @Component({
   selector: 'app-emergency-info',
@@ -13,6 +16,8 @@ import { Medication } from '../../models/medication.model';
 })
 export class EmergencyInfo {
   private readonly fb = inject(FormBuilder);
+  private readonly qrCodeService = inject(QrCodeService);
+  private readonly stlService = inject(StlService);
 
   form = this.fb.group({
     bloodType: [null],
@@ -42,5 +47,11 @@ export class EmergencyInfo {
 
   onSubmit(): void {
     console.log(this.form.value);
+  }
+
+  onExportStl(): void {
+    const grid = this.qrCodeService.generateQrCode('Hello World!');
+    const stlFile = this.stlService.generateStlFile(grid);
+    downloadBlob(stlFile, 'emergency-info.stl');
   }
 }
