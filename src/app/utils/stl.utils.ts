@@ -1,3 +1,5 @@
+import { Triangle } from '../models/geometry.model';
+
 export const addQuietZone = (matrix: boolean[][], quietZoneSize: number = 4): boolean[][] => {
   const paddedSize = matrix.length + quietZoneSize * 2;
 
@@ -25,9 +27,43 @@ export const addQuietZone = (matrix: boolean[][], quietZoneSize: number = 4): bo
 };
 
 export const createBaseLayer = (matrix: boolean[][]): boolean[][] =>
-  matrix.map((row) => row.map(() => false));
+  matrix.map((row) => row.map(() => true));
 
 export const construct3DMatrix = (matrix: boolean[][], baseLayer: boolean[][]): boolean[][][] => [
   baseLayer,
   matrix,
 ];
+
+/**
+ * Serializes an array of triangles into an ASCII STL string:
+ *
+ *   solid name
+ *     facet normal n1 n2 n3
+ *       outer loop
+ *         vertex p1x p1y p1z
+ *         vertex p2x p2y p2z
+ *         vertex p3x p3y p3z
+ *       endloop
+ *     endfacet
+ *   endsolid name
+ *
+ * @param triangles the surface triangles to serialize
+ * @param name the solid's name, written in the opening/closing tags
+ * @returns the STL file contents as an ASCII string
+ */
+export const trianglesToStl = (triangles: Triangle[], name: string = 'model'): string => {
+  const lines: string[] = [`solid ${name}`];
+
+  for (const { normal, vertices } of triangles) {
+    lines.push(`  facet normal ${normal.x} ${normal.y} ${normal.z}`);
+    lines.push('    outer loop');
+    for (const v of vertices) {
+      lines.push(`      vertex ${v.x} ${v.y} ${v.z}`);
+    }
+    lines.push('    endloop');
+    lines.push('  endfacet');
+  }
+
+  lines.push(`endsolid ${name}`);
+  return lines.join('\n');
+};

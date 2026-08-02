@@ -1,4 +1,5 @@
-import { addQuietZone, construct3DMatrix, createBaseLayer } from './stl.utils';
+import { Triangle } from '../models/geometry.model';
+import { addQuietZone, construct3DMatrix, createBaseLayer, trianglesToStl } from './stl.utils';
 
 describe('StlUtils', () => {
   describe('addQuietZone', () => {
@@ -51,8 +52,8 @@ describe('StlUtils', () => {
         [true, false],
       ];
       const baseLayer = [
-        [false, false],
-        [false, false],
+        [true, true],
+        [true, true],
       ];
 
       // Act
@@ -61,6 +62,38 @@ describe('StlUtils', () => {
       // Assert
       expect(result[0]).toEqual(baseLayer);
       expect(result[1]).toEqual(originalMatrix);
+    });
+  });
+
+  describe('trianglesToStl', () => {
+    it('should serialize triangles into an ASCII STL string', () => {
+      // Arrange
+      const triangle: Triangle = {
+        normal: { x: 0, y: 0, z: 1 },
+        vertices: [
+          { x: 1, y: 0, z: 0 },
+          { x: 1, y: 1, z: 0 },
+          { x: 0, y: 0, z: 1 },
+        ],
+      };
+
+      const expectedStlString = [
+        'solid test',
+        '  facet normal 0 0 1',
+        '    outer loop',
+        '      vertex 1 0 0',
+        '      vertex 1 1 0',
+        '      vertex 0 0 1',
+        '    endloop',
+        '  endfacet',
+        'endsolid test',
+      ].join('\n');
+
+      // Act
+      const result = trianglesToStl([triangle], 'test');
+
+      // Assert
+      expect(result).toBe(expectedStlString);
     });
   });
 });
