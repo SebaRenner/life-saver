@@ -1,4 +1,4 @@
-import { addQuietZone } from './stl.utils';
+import { addQuietZone, construct3DMatrix, createBaseLayer } from './stl.utils';
 
 describe('StlUtils', () => {
   describe('addQuietZone', () => {
@@ -25,6 +25,41 @@ describe('StlUtils', () => {
 
       // Assert
       expect(result).toEqual(expectedMatrix);
+    });
+  });
+
+  describe('createBaseLayer', () => {
+    it('should create a base layer with the same dimensions as the original matrix', () => {
+      // Arrange
+      const originalMatrix = [[true], [true, true], [true, false, true]];
+
+      const expectedBaseLayer = [[false], [false, false], [false, false, false]];
+
+      // Act
+      const result = createBaseLayer(originalMatrix);
+
+      // Assert
+      expect(result).toEqual(expectedBaseLayer);
+    });
+  });
+
+  describe('construct3DMatrix', () => {
+    it('should construct a 3D matrix with the base layer and the original matrix', () => {
+      // Arrange
+      const originalMatrix = [
+        [true, true],
+        [true, false],
+      ];
+      const baseLayer = [
+        [false, false],
+        [false, false],
+      ];
+      // Act
+      const result = construct3DMatrix(originalMatrix, baseLayer);
+
+      // Assert
+      expect(result[0]).toEqual(baseLayer);
+      expect(result[1]).toEqual(originalMatrix<);
     });
   });
 });
