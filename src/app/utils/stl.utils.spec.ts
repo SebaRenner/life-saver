@@ -54,12 +54,13 @@ describe('StlUtils', () => {
         [false, false],
         [false, false],
       ];
+
       // Act
       const result = construct3DMatrix(originalMatrix, baseLayer);
 
       // Assert
       expect(result[0]).toEqual(baseLayer);
-      expect(result[1]).toEqual(originalMatrix<);
+      expect(result[1]).toEqual(originalMatrix);
     });
   });
 });
