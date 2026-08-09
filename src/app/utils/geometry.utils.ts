@@ -108,3 +108,6 @@ export const isInsideMatrix = (matrix: boolean[][][], x: number, y: number, z: n
 
 export const isFilled = (matrix: boolean[][][], x: number, y: number, z: number): boolean =>
   isInsideMatrix(matrix, x, y, z) && matrix[z][y][x];
+
+export const invertMatrix = (matrix: boolean[][][]): boolean[][][] =>
+  matrix.map((layer) => layer.map((row) => row.map((cell) => !cell)));

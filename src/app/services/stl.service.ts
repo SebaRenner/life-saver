@@ -3,15 +3,16 @@ import {
   addQuietZone,
   construct3DMatrix,
   createBaseLayer,
+  stlToBlob,
   trianglesToStl,
 } from '../utils/stl.utils';
-import { matrixToTriangles } from '../utils/geometry.utils';
+import { invertMatrix, matrixToTriangles } from '../utils/geometry.utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StlService {
-  generateStlFile(matrix: boolean[][]): Blob {
+  generateStlFile(matrix: boolean[][]): { black: Blob; white: Blob } {
     const quietZoneSize = 2;
 
     const paddedMatrix = addQuietZone(matrix, quietZoneSize);
@@ -20,10 +21,15 @@ export class StlService {
 
     const matrix3D = construct3DMatrix(paddedMatrix, baseLayer);
 
-    const triangles = matrixToTriangles(matrix3D);
+    const blackTriangles = matrixToTriangles(matrix3D);
+    const whiteTriangles = matrixToTriangles(invertMatrix(matrix3D));
 
-    const stl = trianglesToStl(triangles);
+    const blackStl = trianglesToStl(blackTriangles);
+    const whiteStl = trianglesToStl(whiteTriangles);
 
-    return new Blob([stl], { type: 'model/stl' });
+    return {
+      black: stlToBlob(blackStl),
+      white: stlToBlob(whiteStl),
+    };
   }
 }

@@ -51,7 +51,8 @@ export class EmergencyInfo {
 
   onExportStl(): void {
     const grid = this.qrCodeService.generateQrCode('Hello World!');
-    const stlFile = this.stlService.generateStlFile(grid);
-    downloadBlob(stlFile, 'emergency-info.stl');
+    const { black, white } = this.stlService.generateStlFile(grid);
+    downloadBlob(black, 'emergency-info-black.stl');
+    downloadBlob(white, 'emergency-info-white.stl');
   }
 }

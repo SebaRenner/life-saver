@@ -67,3 +67,5 @@ export const trianglesToStl = (triangles: Triangle[], name: string = 'model'): s
   lines.push(`endsolid ${name}`);
   return lines.join('\n');
 };
+
+export const stlToBlob = (stlString: string): Blob => new Blob([stlString], { type: 'model/stl' });
