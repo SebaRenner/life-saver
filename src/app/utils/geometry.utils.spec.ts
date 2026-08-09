@@ -21,14 +21,14 @@ describe('GeometryUtils', () => {
       // Assert
       expect(result).toBe(true);
     });
-  });
 
-  it('should return false if the coordinates are outside the matrix', () => {
-    // Act
-    const result = isInsideMatrix(matrix, 0, 1, 2);
+    it('should return false if the coordinates are outside the matrix', () => {
+      // Act
+      const result = isInsideMatrix(matrix, 0, 1, 2);
 
-    // Assert
-    expect(result).toBe(false);
+      // Assert
+      expect(result).toBe(false);
+    });
   });
 
   describe('isFilled', () => {
