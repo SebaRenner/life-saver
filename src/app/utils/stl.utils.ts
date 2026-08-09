@@ -27,7 +27,7 @@ export const addQuietZone = (matrix: boolean[][], quietZoneSize: number = 4): bo
 };
 
 export const createBaseLayer = (matrix: boolean[][]): boolean[][] =>
-  matrix.map((row) => row.map(() => true));
+  matrix.map((row) => row.map(() => false));
 
 export const construct3DMatrix = (matrix: boolean[][], baseLayer: boolean[][]): boolean[][][] => [
   baseLayer,
