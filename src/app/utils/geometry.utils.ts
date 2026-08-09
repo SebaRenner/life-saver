@@ -1,9 +1,4 @@
-import { Triangle, Vec3 } from '../models/geometry.model';
-
-interface Face {
-  normal: Vec3;
-  corners: [Vec3, Vec3, Vec3, Vec3];
-}
+import { Face, Triangle, Vec3 } from '../models/geometry.model';
 
 const FACES: ReadonlyArray<Face> = [
   {
@@ -87,7 +82,7 @@ export const matrixToTriangles = (matrix: boolean[][][]): Triangle[] => {
 };
 
 // Builds the 2 triangles that make up one exposed cube face.
-const createFace = (x: number, y: number, z: number, face: Face): Triangle[] => {
+export const createFace = (x: number, y: number, z: number, face: Face): Triangle[] => {
   // Turn the 4 corner offsets into absolute points around this cube.
   const [a, b, c, d] = face.corners.map(
     (corner): Vec3 => ({ x: x + corner.x, y: y + corner.y, z: z + corner.z }),

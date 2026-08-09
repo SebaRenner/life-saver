@@ -1,4 +1,5 @@
-import { isFilled, isInsideMatrix } from './geometry.utils';
+import { Face } from '../models/geometry.model';
+import { createFace, isFilled, isInsideMatrix } from './geometry.utils';
 
 // 2x2x2 matrix
 const matrix: boolean[][][] = [
@@ -48,6 +49,44 @@ describe('GeometryUtils', () => {
 
       // Assert
       expect(result).toBe(false);
+    });
+  });
+
+  describe('createFace', () => {
+    it('should build 2 triangles for the +Z (top) face of the cube at the origin', () => {
+      // Arrange
+      const topFace: Face = {
+        normal: { x: 0, y: 0, z: 1 },
+        corners: [
+          { x: 0, y: 0, z: 1 },
+          { x: 1, y: 0, z: 1 },
+          { x: 1, y: 1, z: 1 },
+          { x: 0, y: 1, z: 1 },
+        ],
+      };
+
+      // Act
+      const result = createFace(0, 0, 0, topFace);
+
+      // Assert
+      expect(result).toEqual([
+        {
+          normal: { x: 0, y: 0, z: 1 },
+          vertices: [
+            { x: 0, y: 0, z: 1 },
+            { x: 1, y: 0, z: 1 },
+            { x: 1, y: 1, z: 1 },
+          ],
+        },
+        {
+          normal: { x: 0, y: 0, z: 1 },
+          vertices: [
+            { x: 0, y: 0, z: 1 },
+            { x: 1, y: 1, z: 1 },
+            { x: 0, y: 1, z: 1 },
+          ],
+        },
+      ]);
     });
   });
 });
