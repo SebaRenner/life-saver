@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { addQuietZone, construct3DMatrix, createBaseLayer } from '../utils/stl.utils';
+import {
+  addQuietZone,
+  construct3DMatrix,
+  createBaseLayer,
+  trianglesToStl,
+} from '../utils/stl.utils';
+import { matrixToTriangles } from '../utils/geometry.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +20,10 @@ export class StlService {
 
     const matrix3D = construct3DMatrix(paddedMatrix, baseLayer);
 
-    // Transfrom 3D matrix to STL format? ArrayBuffer?
+    const triangles = matrixToTriangles(matrix3D);
 
-    return new Blob([new ArrayBuffer(0)], { type: 'model/stl' });
+    const stl = trianglesToStl(triangles);
+
+    return new Blob([stl], { type: 'model/stl' });
   }
 }
