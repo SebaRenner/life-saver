@@ -1,6 +1,21 @@
 @LifeSaver_HostAddress = http://localhost:5204
 
-GET {{LifeSaver_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{LifeSaver_HostAddress}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Test1234!"
+}
+
+###
+
+POST {{LifeSaver_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Test1234!"
+}
 
 ###

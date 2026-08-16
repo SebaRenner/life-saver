@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeSaver.API", "LifeSaver.API\LifeSaver.API.csproj", "{C6EE6596-ABB6-A7D1-3944-6F9B8469A3BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeSaver.Infrastructure", "LifeSaver.Infrastructure\LifeSaver.Infrastructure.csproj", "{4D0725C0-9DDD-4EB4-AEF6-DDEE494E4872}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C6EE6596-ABB6-A7D1-3944-6F9B8469A3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6EE6596-ABB6-A7D1-3944-6F9B8469A3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6EE6596-ABB6-A7D1-3944-6F9B8469A3BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D0725C0-9DDD-4EB4-AEF6-DDEE494E4872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D0725C0-9DDD-4EB4-AEF6-DDEE494E4872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D0725C0-9DDD-4EB4-AEF6-DDEE494E4872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D0725C0-9DDD-4EB4-AEF6-DDEE494E4872}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
