@@ -1,5 +1,6 @@
 
 using LifeSaver.API.Requests;
+using LifeSaver.API.Responses;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,15 +11,25 @@ namespace LifeSaver.API.Controllers;
 public class AuthController(UserManager<IdentityUser> userManager) : ControllerBase
 {
   [HttpPost("login")]
-  public async Task<IActionResult> Login([FromBody] LoginRequest request)
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+  public async Task<ActionResult<AuthResponse>> Login([FromBody] LoginRequest request)
   {
-    await Task.Yield();
+    var user = await userManager.FindByEmailAsync(request.Email);
+    if (user == null)
+      return Unauthorized();
 
-    return Ok();
+    var passwordValid = await userManager.CheckPasswordAsync(user, request.Password);
+    if (!passwordValid)
+      return Unauthorized();
+
+    return Ok(new AuthResponse(user.Id));
   }
 
   [HttpPost("register")]
-  public async Task<IActionResult> Register([FromBody] RegistrationRequest request)
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<ActionResult<AuthResponse>> Register([FromBody] RegistrationRequest request)
   {
     var user = new IdentityUser
     {
@@ -31,6 +42,6 @@ public class AuthController(UserManager<IdentityUser> userManager) : ControllerB
     if (!result.Succeeded)
       return BadRequest(result.Errors);
 
-    return Ok(new { userId = user.Id });
+    return Ok(new AuthResponse(user.Id));
   }
 }
