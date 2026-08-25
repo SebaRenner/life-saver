@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LifeSaver.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AuthController(UserManager<IdentityUser> userManager) : ControllerBase
 {
   [HttpPost("login")]

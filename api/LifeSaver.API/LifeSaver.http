@@ -1,6 +1,6 @@
 @LifeSaver_HostAddress = http://localhost:5204
 
-POST {{LifeSaver_HostAddress}}/auth/register
+POST {{LifeSaver_HostAddress}}/api/auth/register
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ###
 
-POST {{LifeSaver_HostAddress}}/auth/login
+POST {{LifeSaver_HostAddress}}/api/auth/login
 Content-Type: application/json
 
 {
