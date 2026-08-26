@@ -1,4 +1,4 @@
-﻿namespace LifeSaver.Infrastructure.Entities;
+﻿namespace LifeSaver.Domain.UserProfile;
 
 public class UserProfile
 {

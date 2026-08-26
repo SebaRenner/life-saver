@@ -1,5 +1,5 @@
 using LifeSaver.Infrastructure.Configurations;
-using LifeSaver.Infrastructure.Entities;
+using LifeSaver.Domain.UserProfile;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

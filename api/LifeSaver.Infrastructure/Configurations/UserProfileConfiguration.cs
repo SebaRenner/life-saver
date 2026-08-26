@@ -1,4 +1,5 @@
-﻿using LifeSaver.Infrastructure.Entities;
+﻿
+using LifeSaver.Domain.UserProfile;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
