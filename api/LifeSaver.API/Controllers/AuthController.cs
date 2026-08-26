@@ -1,6 +1,7 @@
 
 using LifeSaver.API.Requests;
 using LifeSaver.API.Responses;
+using LifeSaver.Application.UserProfiles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,9 @@ namespace LifeSaver.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(UserManager<IdentityUser> userManager) : ControllerBase
+public class AuthController(
+    UserManager<IdentityUser> userManager,
+    IUserProfileService userProfileService) : ControllerBase
 {
   [HttpPost("login")]
   [ProducesResponseType(StatusCodes.Status200OK)]
@@ -29,19 +32,15 @@ public class AuthController(UserManager<IdentityUser> userManager) : ControllerB
   [HttpPost("register")]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
-  public async Task<ActionResult<AuthResponse>> Register([FromBody] RegistrationRequest request)
+  public async Task<ActionResult<AuthResponse>> Register(
+      [FromBody] RegistrationRequest request,
+      CancellationToken cancellationToken)
   {
-    var user = new IdentityUser
-    {
-      UserName = request.Email,
-      Email = request.Email
-    };
+    var registerResult = await userProfileService.RegisterAsync(request.Email, request.Password, cancellationToken);
 
-    var result = await userManager.CreateAsync(user, request.Password);
+    if (!registerResult.IdentityResult.Succeeded)
+      return BadRequest(registerResult.IdentityResult.Errors);
 
-    if (!result.Succeeded)
-      return BadRequest(result.Errors);
-
-    return Ok(new AuthResponse(user.Id));
+    return Ok(new AuthResponse(registerResult.UserId!));
   }
 }

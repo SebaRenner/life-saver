@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LifeSaver.Application\LifeSaver.Application.csproj" />
     <ProjectReference Include="..\LifeSaver.Infrastructure\LifeSaver.Infrastructure.csproj" />
   </ItemGroup>
 

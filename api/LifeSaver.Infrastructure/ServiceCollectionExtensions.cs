@@ -1,4 +1,4 @@
-﻿using LifeSaver.Domain.UserProfile;
+﻿using LifeSaver.Domain.UserProfiles;
 using LifeSaver.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 

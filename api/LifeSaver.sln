@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeSaver.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeSaver.Domain", "LifeSaver.Domain\LifeSaver.Domain.csproj", "{9D54D861-458E-4331-949E-C461EE596628}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeSaver.Application", "LifeSaver.Application\LifeSaver.Application.csproj", "{50B71B86-8A1B-461C-AC76-59839927A402}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9D54D861-458E-4331-949E-C461EE596628}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D54D861-458E-4331-949E-C461EE596628}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D54D861-458E-4331-949E-C461EE596628}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50B71B86-8A1B-461C-AC76-59839927A402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B71B86-8A1B-461C-AC76-59839927A402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B71B86-8A1B-461C-AC76-59839927A402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B71B86-8A1B-461C-AC76-59839927A402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

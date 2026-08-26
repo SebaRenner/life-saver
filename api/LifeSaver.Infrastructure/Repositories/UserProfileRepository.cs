@@ -1,4 +1,4 @@
-﻿using LifeSaver.Domain.UserProfile;
+﻿using LifeSaver.Domain.UserProfiles;
 
 namespace LifeSaver.Infrastructure.Repositories;
 

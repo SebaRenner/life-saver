@@ -1,4 +1,4 @@
-﻿namespace LifeSaver.Domain.UserProfile;
+﻿namespace LifeSaver.Domain.UserProfiles;
 
 public interface IUserProfileRepository
 {

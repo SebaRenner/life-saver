@@ -1,3 +1,4 @@
+using LifeSaver.Application;
 using LifeSaver.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddRepositories();
+builder.Services.AddApplicationServices();
 
 builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>
