@@ -2,15 +2,15 @@
 using LifeSaver.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
-namespace LifeSaver.Application.UserProfiles;
+namespace LifeSaver.Application.Auth;
 
-public class UserProfileService : IUserProfileService
+public class AuthService : IAuthService
 {
     private readonly AppDbContext _context;
     private readonly IUserProfileRepository _userProfileRepository;
     private readonly UserManager<IdentityUser> _userManager;
 
-    public UserProfileService(
+    public AuthService(
         AppDbContext context,
         IUserProfileRepository userProfileRepository,
         UserManager<IdentityUser> userManager)
@@ -18,6 +18,19 @@ public class UserProfileService : IUserProfileService
         _context = context;
         _userProfileRepository = userProfileRepository;
         _userManager = userManager;
+    }
+
+    public async Task<LoginResult> LoginAsync(string email, string password, CancellationToken cancellationToken = default)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null)
+            return LoginResult.Failure();
+
+        var passwordValid = await _userManager.CheckPasswordAsync(user, password);
+        if (!passwordValid)
+            return LoginResult.Failure();
+
+        return LoginResult.Success(user.Id);
     }
 
     public async Task<RegisterResult> RegisterAsync(string email, string password, CancellationToken cancellationToken = default)

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace LifeSaver.Application.UserProfiles;
+namespace LifeSaver.Application.Auth;
 
 public record RegisterResult
 {
