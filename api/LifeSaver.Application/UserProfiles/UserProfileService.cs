@@ -16,9 +16,9 @@ public class UserProfileService : IUserProfileService
         return _repository.GetByIdAsync(userId, cancellationToken);
     }
 
-    public async Task<UserProfile?> UpdateUserProfileAsync(UserProfile userProfile, CancellationToken cancellationToken = default)
+    public async Task<UserProfile?> UpdateUserProfileAsync(string userId, UserProfile userProfile, CancellationToken cancellationToken = default)
     {
-        var existingProfile = await _repository.GetByIdAsync(userProfile.UserId, cancellationToken);
+        var existingProfile = await _repository.GetByIdAsync(userId, cancellationToken);
 
         if (existingProfile is null)
             return null;
