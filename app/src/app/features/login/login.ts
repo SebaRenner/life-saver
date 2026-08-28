@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { AuthStore } from '../../store/auth.store';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class Login {
   readonly loginForm: FormGroup;
 
   private readonly authService = inject(AuthService);
+  private readonly authStore = inject(AuthStore);
   private readonly router = inject(Router);
 
   constructor(fb: FormBuilder) {
@@ -29,8 +31,7 @@ export class Login {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe((response) => {
-        // Store ID in Session Store
-
+        this.authStore.login(response.userId);
         this.router.navigate(['']);
       });
     }
