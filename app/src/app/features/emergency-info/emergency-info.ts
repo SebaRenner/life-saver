@@ -1,6 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BloodTypeComponent } from '../../components/blood-type/blood-type.component';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MedicationComponent } from '../../components/medication/medication.component';
 import { Medication } from '../../models/medication.model';
@@ -9,11 +9,23 @@ import { StlService } from '../../services/stl.service';
 import { downloadBlob } from '../../utils/download.utils';
 import { AuthStore } from '../../store/auth.store';
 import { UserProfileService } from '../../services/user-profile.service';
-import { UserProfile } from '../../models/user-profile.model';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-emergency-info',
-  imports: [ReactiveFormsModule, BloodTypeComponent, MatButton, MedicationComponent],
+  imports: [
+    ReactiveFormsModule,
+    BloodTypeComponent,
+    MatButton,
+    MedicationComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
   templateUrl: './emergency-info.html',
   styleUrl: './emergency-info.scss',
 })
@@ -24,9 +36,10 @@ export class EmergencyInfo implements OnInit {
   private readonly authStore = inject(AuthStore);
   private readonly userProfileService = inject(UserProfileService);
 
-  userProfile = signal<UserProfile | null>(null);
-
   form = this.fb.group({
+    firstName: [null as string | null, Validators.maxLength(100)],
+    lastName: [null as string | null, Validators.maxLength(100)],
+    dateOfBirth: [null as Date | null],
     bloodType: [null],
     medications: this.fb.array([]),
   });
@@ -41,7 +54,11 @@ export class EmergencyInfo implements OnInit {
     const userId = this.authStore.userId();
     if (userId) {
       this.userProfileService.getById(userId).subscribe((userProfile) => {
-        this.userProfile.set(userProfile);
+        this.form.patchValue({
+          firstName: userProfile.firstName,
+          lastName: userProfile.lastName,
+          dateOfBirth: userProfile.dateOfBirth,
+        });
       });
     }
   }
