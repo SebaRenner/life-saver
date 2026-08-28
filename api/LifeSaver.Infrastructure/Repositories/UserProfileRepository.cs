@@ -19,7 +19,9 @@ public class UserProfileRepository : IUserProfileRepository
 
     public Task SaveAsync(UserProfile profile, CancellationToken cancellationToken = default)
     {
-        _context.UserProfiles.Add(profile);
+        if (_context.Entry(profile).State == EntityState.Detached)
+            _context.UserProfiles.Add(profile);
+
         return _context.SaveChangesAsync(cancellationToken);
     }
 }

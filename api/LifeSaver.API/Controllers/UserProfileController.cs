@@ -1,4 +1,5 @@
-﻿using LifeSaver.Application.UserProfiles;
+﻿using LifeSaver.API.Requests;
+using LifeSaver.Application.UserProfiles;
 using LifeSaver.Domain.UserProfiles;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +12,11 @@ public class UserProfileController(IUserProfileService userProfileService) : Con
     [HttpGet("{userId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<UserProfile>> GetUserProfile(string userId)
+    public async Task<ActionResult<UserProfile>> GetUserProfile(
+        string userId,
+        CancellationToken cancellationToken)
     {
-        var userProfile = await userProfileService.GetUserProfileByIdAsync(userId);
+        var userProfile = await userProfileService.GetUserProfileByIdAsync(userId, cancellationToken);
 
         if (userProfile is null)
         {
@@ -21,5 +24,31 @@ public class UserProfileController(IUserProfileService userProfileService) : Con
         }
 
         return Ok(userProfile);
+    }
+
+    [HttpPut("{userId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<UserProfile>> UpdateUserProfile(
+        string userId,
+        [FromBody] UpdateUserProfileRequest userProfileRequestBody,
+        CancellationToken cancellationToken)
+    {
+        var userProfile = new UserProfile
+        {
+            UserId = userId,
+            FirstName = userProfileRequestBody.FirstName,
+            LastName = userProfileRequestBody.LastName,
+            DateOfBirth = userProfileRequestBody.DateOfBirth
+        };
+
+        var updatedUserProfile = await userProfileService.UpdateUserProfileAsync(userId, userProfile, cancellationToken);
+
+        if (updatedUserProfile is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(updatedUserProfile);
     }
 }
