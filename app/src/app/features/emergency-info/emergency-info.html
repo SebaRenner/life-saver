@@ -1,4 +1,4 @@
-<h1>Emergency Info of Jane Doe</h1>
+<h1>Emergency Info of {{ userProfile()?.firstName }} {{ userProfile()?.lastName }}</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2>Blood Type</h2>
   <app-blood-type formControlName="bloodType" />
@@ -7,7 +7,7 @@
   @for (row of medicationRows; track row) {
   <app-medication (addMedication)="onMedicationAdded($event)" />
   }
-  
+
   <div class="actions">
     <button matButton="filled" type="submit">Save</button>
     <button matButton="outlined" type="button" (click)="onExportStl()">Export STL</button>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { BloodTypeComponent } from '../../components/blood-type/blood-type.component';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -7,6 +7,9 @@ import { Medication } from '../../models/medication.model';
 import { QrCodeService } from '../../services/qr-code.service';
 import { StlService } from '../../services/stl.service';
 import { downloadBlob } from '../../utils/download.utils';
+import { AuthStore } from '../../store/auth.store';
+import { UserProfileService } from '../../services/user-profile.service';
+import { UserProfile } from '../../models/user-profile.model';
 
 @Component({
   selector: 'app-emergency-info',
@@ -14,10 +17,14 @@ import { downloadBlob } from '../../utils/download.utils';
   templateUrl: './emergency-info.html',
   styleUrl: './emergency-info.scss',
 })
-export class EmergencyInfo {
+export class EmergencyInfo implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly qrCodeService = inject(QrCodeService);
   private readonly stlService = inject(StlService);
+  private readonly authStore = inject(AuthStore);
+  private readonly userProfileService = inject(UserProfileService);
+
+  userProfile = signal<UserProfile | null>(null);
 
   form = this.fb.group({
     bloodType: [null],
@@ -28,6 +35,15 @@ export class EmergencyInfo {
 
   get medications(): FormArray {
     return this.form.get('medications') as FormArray;
+  }
+
+  ngOnInit(): void {
+    const userId = this.authStore.userId();
+    if (userId) {
+      this.userProfileService.getById(userId).subscribe((userProfile) => {
+        this.userProfile.set(userProfile);
+      });
+    }
   }
 
   onMedicationAdded(medication: Medication): void {
