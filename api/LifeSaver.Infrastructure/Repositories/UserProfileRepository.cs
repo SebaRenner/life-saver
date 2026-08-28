@@ -1,4 +1,5 @@
 ﻿using LifeSaver.Domain.UserProfiles;
+using Microsoft.EntityFrameworkCore;
 
 namespace LifeSaver.Infrastructure.Repositories;
 
@@ -9,6 +10,11 @@ public class UserProfileRepository : IUserProfileRepository
     public UserProfileRepository(AppDbContext context)
     {
         _context = context;
+    }
+
+    public Task<UserProfile?> GetByIdAsync(string userId, CancellationToken cancellationToken = default)
+    {
+        return _context.UserProfiles.FirstOrDefaultAsync(up => up.UserId == userId, cancellationToken);
     }
 
     public Task SaveAsync(UserProfile profile, CancellationToken cancellationToken = default)

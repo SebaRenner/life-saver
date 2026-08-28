@@ -19,3 +19,8 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{LifeSaver_HostAddress}}/api/userProfile/1b540493-6ac1-470f-915b-e82d0789e6eb
+Content-Type: application/json
+
+###
