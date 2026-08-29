@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { UserProfileUpdateRequest } from '../../models/user-profile.model';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-emergency-info',
@@ -39,7 +41,7 @@ export class EmergencyInfo implements OnInit {
   form = this.fb.group({
     firstName: [null as string | null, Validators.maxLength(100)],
     lastName: [null as string | null, Validators.maxLength(100)],
-    dateOfBirth: [null as Date | null],
+    dateOfBirth: [null as string | null],
     bloodType: [null],
     medications: this.fb.array([]),
   });
@@ -79,7 +81,17 @@ export class EmergencyInfo implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
+    if (this.form.valid) {
+      const userId = this.authStore.userId();
+      const { firstName, lastName, dateOfBirth } = this.form.value;
+      const updateRequest: UserProfileUpdateRequest = {
+        firstName: firstName ?? undefined,
+        lastName: lastName ?? undefined,
+        dateOfBirth: dateOfBirth ? format(new Date(dateOfBirth), 'yyyy-MM-dd') : undefined,
+      };
+
+      this.userProfileService.update(userId!, updateRequest).subscribe();
+    }
   }
 
   onExportStl(): void {

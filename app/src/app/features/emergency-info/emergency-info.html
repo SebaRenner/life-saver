@@ -30,7 +30,7 @@
   }
 
   <div class="actions">
-    <button matButton="filled" type="submit">Save</button>
+    <button matButton="filled" type="submit" [disabled]="form.invalid">Save</button>
     <button matButton="outlined" type="button" (click)="onExportStl()">Export STL</button>
   </div>
 </form>

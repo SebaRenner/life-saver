@@ -2,7 +2,7 @@ export interface UserProfile {
   id: string;
   firstName?: string;
   lastName?: string;
-  dateOfBirth?: Date;
+  dateOfBirth?: string;
 }
 
 export interface UserProfileUpdateRequest extends Omit<UserProfile, 'id'> {}
