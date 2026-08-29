@@ -2,7 +2,7 @@ import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { BloodType } from '../../models/blood-type.model';
+import { BloodType, BloodTypeLabels } from '../../models/blood-type.model';
 
 @Component({
   selector: 'app-blood-type',
@@ -19,6 +19,7 @@ import { BloodType } from '../../models/blood-type.model';
 })
 export class BloodTypeComponent implements ControlValueAccessor {
   readonly options = Object.values(BloodType);
+  readonly labels = BloodTypeLabels;
 
   value: BloodType | null = null;
   isDisabled = false;

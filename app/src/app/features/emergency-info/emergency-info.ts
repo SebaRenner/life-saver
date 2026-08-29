@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { UserProfileUpdateRequest } from '../../models/user-profile.model';
 import { format } from 'date-fns';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { BloodType } from '../../models/blood-type.model';
 
 @Component({
   selector: 'app-emergency-info',
@@ -46,7 +47,7 @@ export class EmergencyInfo implements OnInit {
     firstName: [null as string | null, Validators.maxLength(100)],
     lastName: [null as string | null, Validators.maxLength(100)],
     dateOfBirth: [null as string | null],
-    bloodType: [null],
+    bloodType: [null as BloodType | null],
     medications: this.fb.array([]),
   });
 
@@ -64,6 +65,7 @@ export class EmergencyInfo implements OnInit {
           firstName: userProfile.firstName,
           lastName: userProfile.lastName,
           dateOfBirth: userProfile.dateOfBirth,
+          bloodType: userProfile.bloodType,
         });
         this.isLoading.set(false);
       });
@@ -88,11 +90,12 @@ export class EmergencyInfo implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       const userId = this.authStore.userId();
-      const { firstName, lastName, dateOfBirth } = this.form.value;
+      const { firstName, lastName, dateOfBirth, bloodType } = this.form.value;
       const updateRequest: UserProfileUpdateRequest = {
         firstName: firstName ?? undefined,
         lastName: lastName ?? undefined,
         dateOfBirth: dateOfBirth ? format(new Date(dateOfBirth), 'yyyy-MM-dd') : undefined,
+        bloodType: bloodType ?? undefined,
       };
 
       this.userProfileService.update(userId!, updateRequest).subscribe();
