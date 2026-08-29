@@ -14,10 +14,10 @@ type ProfileState =
 @Component({
   imports: [AsyncPipe, SpinnerComponent],
   selector: 'app-emergency-info-view',
-  styleUrl: './emergency-info-view.scss',
-  templateUrl: './emergency-info-view.html',
+  styleUrl: './emergency-info-view.component.scss',
+  templateUrl: './emergency-info-view.component.html',
 })
-export class EmergencyInfoView {
+export class EmergencyInfoViewComponent {
   private readonly userProfileService = inject(UserProfileService);
   private readonly route = inject(ActivatedRoute);
 

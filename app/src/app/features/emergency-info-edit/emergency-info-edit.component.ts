@@ -31,10 +31,10 @@ import { BloodType } from '../../models/blood-type.model';
     MatNativeDateModule,
     SpinnerComponent,
   ],
-  templateUrl: './emergency-info-edit.html',
-  styleUrl: './emergency-info-edit.scss',
+  templateUrl: './emergency-info-edit.component.html',
+  styleUrl: './emergency-info-edit.component.scss',
 })
-export class EmergencyInfoEdit implements OnInit {
+export class EmergencyInfoEditComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly qrCodeService = inject(QrCodeService);
   private readonly stlService = inject(StlService);

@@ -1,0 +1,9 @@
+@if (profileState$ | async; as state) {
+  @if (state.status === 'loading') {
+    <app-spinner></app-spinner>
+  } @else if (state.status === 'loaded') {
+    <p>{{ state.data.firstName }} {{ state.data.lastName }}</p>
+  } @else {
+    <p>Profile not found.</p>
+  }
+}

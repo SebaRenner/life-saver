@@ -1,0 +1,40 @@
+@if (isLoading()) {
+  <app-spinner />;
+} @else {
+  <h1>Enter your Emergency Information</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="name-fields">
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" />
+        <mat-datepicker-toggle matSuffix [for]="picker" />
+        <mat-datepicker #picker />
+      </mat-form-field>
+    </div>
+
+    <h2>Blood Type</h2>
+    <app-blood-type formControlName="bloodType" />
+
+    <h2>Medications</h2>
+    @for (row of medicationRows; track row) {
+      <app-medication (addMedication)="onMedicationAdded($event)" />
+    }
+
+    <div class="actions">
+      <button matButton="filled" type="submit" [disabled]="form.invalid">Save</button>
+      <button matButton="outlined" type="button" (click)="onExportStl()">Export STL</button>
+    </div>
+  </form>
+}

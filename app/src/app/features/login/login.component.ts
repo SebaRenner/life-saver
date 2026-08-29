@@ -10,10 +10,10 @@ import { AuthStore } from '../../store/auth.store';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class Login {
+export class LoginComponent {
   readonly loginForm: FormGroup;
 
   private readonly authService = inject(AuthService);
