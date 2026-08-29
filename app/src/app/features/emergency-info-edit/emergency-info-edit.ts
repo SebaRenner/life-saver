@@ -19,7 +19,7 @@ import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { BloodType } from '../../models/blood-type.model';
 
 @Component({
-  selector: 'app-emergency-info',
+  selector: 'app-emergency-info-edit',
   imports: [
     ReactiveFormsModule,
     BloodTypeComponent,
@@ -31,10 +31,10 @@ import { BloodType } from '../../models/blood-type.model';
     MatNativeDateModule,
     SpinnerComponent,
   ],
-  templateUrl: './emergency-info.html',
-  styleUrl: './emergency-info.scss',
+  templateUrl: './emergency-info-edit.html',
+  styleUrl: './emergency-info-edit.scss',
 })
-export class EmergencyInfo implements OnInit {
+export class EmergencyInfoEdit implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly qrCodeService = inject(QrCodeService);
   private readonly stlService = inject(StlService);

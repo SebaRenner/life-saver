@@ -32,7 +32,7 @@ export class Login {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe((response) => {
         this.authStore.login(response.userId);
-        this.router.navigate(['']);
+        this.router.navigate(['edit']);
       });
     }
   }
