@@ -1,3 +1,4 @@
+@if (isLoading()) { <app-spinner />; } @else {
 <h1>Enter your Emergency Information</h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="name-fields">
@@ -34,3 +35,4 @@
     <button matButton="outlined" type="button" (click)="onExportStl()">Export STL</button>
   </div>
 </form>
+}

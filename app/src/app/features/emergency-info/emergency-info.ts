@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { BloodTypeComponent } from '../../components/blood-type/blood-type.component';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -15,6 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { UserProfileUpdateRequest } from '../../models/user-profile.model';
 import { format } from 'date-fns';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-emergency-info',
@@ -27,6 +28,7 @@ import { format } from 'date-fns';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    SpinnerComponent,
   ],
   templateUrl: './emergency-info.html',
   styleUrl: './emergency-info.scss',
@@ -37,6 +39,8 @@ export class EmergencyInfo implements OnInit {
   private readonly stlService = inject(StlService);
   private readonly authStore = inject(AuthStore);
   private readonly userProfileService = inject(UserProfileService);
+
+  isLoading = signal(true);
 
   form = this.fb.group({
     firstName: [null as string | null, Validators.maxLength(100)],
@@ -61,6 +65,7 @@ export class EmergencyInfo implements OnInit {
           lastName: userProfile.lastName,
           dateOfBirth: userProfile.dateOfBirth,
         });
+        this.isLoading.set(false);
       });
     }
   }
