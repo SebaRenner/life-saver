@@ -10,10 +10,13 @@ public class UserProfile
 
     public DateOnly? DateOfBirth { get; set; }
 
+    public BloodType? BloodType { get; set; }
+
     public void UpdateProfile(UserProfile newProfile)
     {
         FirstName = newProfile.FirstName;
         LastName = newProfile.LastName;
         DateOfBirth = newProfile.DateOfBirth;
+        BloodType = newProfile.BloodType;
     }
 }

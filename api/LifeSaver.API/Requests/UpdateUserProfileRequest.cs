@@ -1,4 +1,6 @@
-﻿namespace LifeSaver.API.Requests;
+﻿using LifeSaver.Domain.UserProfiles;
+
+namespace LifeSaver.API.Requests;
 
 public record UpdateUserProfileRequest
 {
@@ -7,4 +9,6 @@ public record UpdateUserProfileRequest
     public string? LastName { get; init; }
 
     public DateOnly? DateOfBirth { get; init; }
+
+    public BloodType? BloodType { get; init; }
 }

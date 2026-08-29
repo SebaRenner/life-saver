@@ -39,7 +39,8 @@ public class UserProfileController(IUserProfileService userProfileService) : Con
             UserId = userId,
             FirstName = userProfileRequestBody.FirstName,
             LastName = userProfileRequestBody.LastName,
-            DateOfBirth = userProfileRequestBody.DateOfBirth
+            DateOfBirth = userProfileRequestBody.DateOfBirth,
+            BloodType = userProfileRequestBody.BloodType
         };
 
         var updatedUserProfile = await userProfileService.UpdateUserProfileAsync(userId, userProfile, cancellationToken);

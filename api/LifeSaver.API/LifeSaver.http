@@ -29,9 +29,10 @@ PUT {{LifeSaver_HostAddress}}/api/userProfile/1b540493-6ac1-470f-915b-e82d0789e6
 Content-Type: application/json
 
 {
-  "firstName": "Seba",
-  "lastName": "Renner",
-  "dateOfBirth": "1990-01-15"
+  "firstName": "Max",
+  "lastName": "Muster",
+  "dateOfBirth": "1990-01-15",
+  "bloodType": "A_Positive"
 }
 
 ###

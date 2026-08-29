@@ -1,5 +1,4 @@
-﻿
-using LifeSaver.Domain.UserProfiles;
+﻿using LifeSaver.Domain.UserProfiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,5 +21,14 @@ public class UserProfileConfiguration : IEntityTypeConfiguration<UserProfile>
 
         builder.Property(x => x.DateOfBirth)
             .HasColumnType("date");
+
+        builder.Property(x => x.BloodType)
+            .HasConversion<string>()
+            .HasMaxLength(20);
+
+        builder.ToTable(t => t.HasCheckConstraint(
+            "CK_UserProfile_BloodType",
+            "\"BloodType\" IN ('A_Positive', 'A_Negative', 'B_Positive', 'B_Negative', 'AB_Positive', 'AB_Negative', 'O_Positive', 'O_Negative')"
+        ));
     }
 }
