@@ -2,7 +2,7 @@
   @if (state.status === 'loading') {
     <app-spinner></app-spinner>
   } @else if (state.status === 'loaded') {
-    <p>{{ state.data.firstName }} {{ state.data.lastName }}</p>
+    <app-emergency-card [profile]="state.data"></app-emergency-card>
   } @else {
     <p>Profile not found.</p>
   }

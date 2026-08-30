@@ -5,6 +5,7 @@ import { catchError, map, of, startWith, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { UserProfile } from '../../models/user-profile.model';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { EmergencyCardComponent } from '../../components/emergency-card/emergency-card.component';
 
 type ProfileState =
   | { status: 'loading' }
@@ -12,7 +13,7 @@ type ProfileState =
   | { status: 'not_found' };
 
 @Component({
-  imports: [AsyncPipe, SpinnerComponent],
+  imports: [AsyncPipe, SpinnerComponent, EmergencyCardComponent],
   selector: 'app-emergency-info-view',
   styleUrl: './emergency-info-view.component.scss',
   templateUrl: './emergency-info-view.component.html',

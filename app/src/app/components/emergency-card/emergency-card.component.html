@@ -1,0 +1,7 @@
+<div class="emergency-label">Emergency Profile</div>
+@if (profile().firstName || profile().lastName) {
+  <div class="name">{{ profile().firstName }} {{ profile().lastName }}</div>
+}
+@if (profile().dateOfBirth) {
+  <div class="dob">Born {{ profile().dateOfBirth }} · {{ profile().dateOfBirth | age }} yrs</div>
+}
