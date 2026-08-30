@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { BloodTypeComponent } from '../../components/blood-type/blood-type.component';
+import { BloodTypeSelectComponent } from '../../components/blood-type-select/blood-type-select.component';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MedicationComponent } from '../../components/medication/medication.component';
@@ -22,7 +22,7 @@ import { BloodType } from '../../models/blood-type.model';
   selector: 'app-emergency-info-edit',
   imports: [
     ReactiveFormsModule,
-    BloodTypeComponent,
+    BloodTypeSelectComponent,
     MatButton,
     MedicationComponent,
     MatFormFieldModule,

@@ -5,19 +5,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { BloodType, BloodTypeLabels } from '../../models/blood-type.model';
 
 @Component({
-  selector: 'app-blood-type',
+  selector: 'app-blood-type-select',
   imports: [MatFormFieldModule, MatSelectModule],
-  templateUrl: './blood-type.component.html',
-  styleUrl: './blood-type.component.scss',
+  templateUrl: './blood-type-select.component.html',
+  styleUrl: './blood-type-select.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => BloodTypeComponent),
+      useExisting: forwardRef(() => BloodTypeSelectComponent),
       multi: true,
     },
   ],
 })
-export class BloodTypeComponent implements ControlValueAccessor {
+export class BloodTypeSelectComponent implements ControlValueAccessor {
   readonly options = Object.values(BloodType);
   readonly labels = BloodTypeLabels;
 
