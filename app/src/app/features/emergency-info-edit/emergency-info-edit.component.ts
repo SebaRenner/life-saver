@@ -103,7 +103,9 @@ export class EmergencyInfoEditComponent implements OnInit {
   }
 
   onExportStl(): void {
-    const grid = this.qrCodeService.generateQrCode('Hello World!');
+    const userId = this.authStore.userId();
+    const url = `${window.location.origin}/${userId}`;
+    const grid = this.qrCodeService.generateQrCode(url);
     const { black, white } = this.stlService.generateStlFile(grid);
     downloadBlob(black, 'emergency-info-black.stl');
     downloadBlob(white, 'emergency-info-white.stl');
