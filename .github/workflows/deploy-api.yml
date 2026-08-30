@@ -32,7 +32,7 @@ jobs:
               run: dotnet build --no-restore --configuration Release
 
             - name: Publish
-              run: dotnet publish --no-build --configuration Release --output ./publish
+              run: dotnet publish LifeSaver.API/LifeSaver.API.csproj --no-build --configuration Release --output ./publish
 
             - name: Upload artifact
               uses: actions/upload-artifact@v4
