@@ -1,0 +1,13 @@
+@if (bloodType()) {
+  <div class="pill pill--known">
+    <mat-icon>water_drop</mat-icon>
+    <span
+      >Blood type: <span class="factor">{{ labels[bloodType()!] }}</span></span
+    >
+  </div>
+} @else {
+  <div class="pill pill--unknown">
+    <mat-icon>water_drop</mat-icon>
+    Blood type: unknown
+  </div>
+}

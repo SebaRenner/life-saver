@@ -5,3 +5,4 @@
 @if (profile().dateOfBirth) {
   <div class="dob">Born {{ profile().dateOfBirth }} · {{ profile().dateOfBirth | age }} yrs</div>
 }
+<app-blood-type-display [bloodType]="profile().bloodType"></app-blood-type-display>
