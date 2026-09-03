@@ -1,5 +1,5 @@
 locals {
-  location = "switzerlandnorth"
+  location = "westeurope"
 }
 
 resource "azurerm_resource_group" "rg" {
