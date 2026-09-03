@@ -1,6 +1,6 @@
 locals {
   location = "switzerlandnorth"
-  stapp_location = "eastus"
+  stapp_location = "eastus2"
 }
 
 resource "azurerm_resource_group" "rg" {
