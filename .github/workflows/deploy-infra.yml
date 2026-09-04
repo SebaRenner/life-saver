@@ -1,0 +1,49 @@
+name: Deploy Infra
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - "terraform/**"
+    workflow_dispatch:
+
+jobs:
+    infra:
+        runs-on: ubuntu-latest
+        permissions:
+          id-token: write
+          contents: read
+
+        defaults:
+          run:
+            working-directory: terraform
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Azure Login
+              uses: azure/login@v2
+              with:
+                client-id: ${{ secrets.AZURE_CLIENT_ID }}
+                tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+
+            - name: Terraform Init
+              run: |
+                terraform init \
+                  -backend-config="resource_group_name=${{ secrets.TF_BACKEND_RESOURCE_GROUP }}" \
+                  -backend-config="storage_account_name=${{ secrets.TF_BACKEND_STORAGE_ACCOUNT }}" \
+                  -backend-config="container_name=${{ secrets.TF_BACKEND_CONTAINER }}" \
+                  -backend-config="key=lifesaver.tfstate" \
+                  -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
+            - name: Terraform Plan
+              run: terraform plan -out=tfplan
+
+            - name: Terraform Apply
+              run: terraform apply -auto-approve tfplan
