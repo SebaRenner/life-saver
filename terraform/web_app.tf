@@ -17,4 +17,11 @@ resource "azurerm_linux_web_app" "api" {
       dotnet_version = "10.0"
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      # Set via deployment pipeline, not managed by Terraform
+      app_settings["ConnectionStrings__DbConnection"]
+    ]
+  }
 }
