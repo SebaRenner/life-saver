@@ -100,6 +100,16 @@ jobs:
                 tenant-id: ${{ secrets.AZURE_TENANT_ID }}
                 subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+            - name: Set db connection string
+              uses: azure/cli@v2
+              with:
+                azcliversion: latest
+                inlineScript: |
+                  az webapp config appsettings set \
+                    --name app-life-saver \
+                    --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+                    --settings ConnectionStrings__DbConnection="${{ secrets.DB_CONNECTION_STRING }}"
+
             - name: Deploy to Azure Web App
               uses: azure/webapps-deploy@v3
               with:
