@@ -6,5 +6,5 @@ public interface IUserProfileService
 {
     public Task<UserProfile?> GetUserProfileByIdAsync(string userId, CancellationToken cancellationToken = default);
 
-    public Task<UserProfile?> UpdateUserProfileAsync(string userId, UserProfile userProfile, CancellationToken cancellationToken = default);
+    public Task<UserProfile?> UpdateUserProfileAsync(UpdateUserProfileCommand command, CancellationToken cancellationToken = default);
 }

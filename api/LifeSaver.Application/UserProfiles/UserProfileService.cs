@@ -16,14 +16,14 @@ public class UserProfileService : IUserProfileService
         return _repository.GetByIdAsync(userId, cancellationToken);
     }
 
-    public async Task<UserProfile?> UpdateUserProfileAsync(string userId, UserProfile userProfile, CancellationToken cancellationToken = default)
+    public async Task<UserProfile?> UpdateUserProfileAsync(UpdateUserProfileCommand command, CancellationToken cancellationToken = default)
     {
-        var existingProfile = await _repository.GetByIdAsync(userId, cancellationToken);
+        var existingProfile = await _repository.GetByIdAsync(command.UserId, cancellationToken);
 
         if (existingProfile is null)
             return null;
 
-        existingProfile.UpdateProfile(userProfile);
+        existingProfile.UpdateProfile(command.FirstName, command.LastName, command.DateOfBirth, command.BloodType);
 
         await _repository.SaveAsync(existingProfile, cancellationToken);
 

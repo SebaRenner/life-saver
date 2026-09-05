@@ -34,16 +34,14 @@ public class UserProfileController(IUserProfileService userProfileService) : Con
         [FromBody] UpdateUserProfileRequest userProfileRequestBody,
         CancellationToken cancellationToken)
     {
-        var userProfile = new UserProfile
-        {
-            UserId = userId,
-            FirstName = userProfileRequestBody.FirstName,
-            LastName = userProfileRequestBody.LastName,
-            DateOfBirth = userProfileRequestBody.DateOfBirth,
-            BloodType = userProfileRequestBody.BloodType
-        };
+        var command = new UpdateUserProfileCommand(
+            userId,
+            userProfileRequestBody.FirstName,
+            userProfileRequestBody.LastName,
+            userProfileRequestBody.DateOfBirth,
+            userProfileRequestBody.BloodType);
 
-        var updatedUserProfile = await userProfileService.UpdateUserProfileAsync(userId, userProfile, cancellationToken);
+        var updatedUserProfile = await userProfileService.UpdateUserProfileAsync(command, cancellationToken);
 
         if (updatedUserProfile is null)
         {

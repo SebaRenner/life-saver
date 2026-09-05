@@ -8,21 +8,27 @@ public class UserProfile
 
     public required string UserId { get; init; }  // string because IdentityUser's Id is a string
 
-    public string? FirstName { get; set; }
+    public string? FirstName { get; private set; }
 
-    public string? LastName { get; set; }
+    public string? LastName { get; private set; }
 
-    public DateOnly? DateOfBirth { get; set; }
+    public DateOnly? DateOfBirth { get; private set; }
 
-    public BloodType? BloodType { get; set; }
+    public BloodType? BloodType { get; private set; }
 
     public IReadOnlyCollection<Prescription> Prescriptions => _prescriptions.AsReadOnly();
 
-    public void UpdateProfile(UserProfile newProfile)
+    public void UpdateProfile(string? firstName, string? lastName, DateOnly? dateOfBirth, BloodType? bloodType)
     {
-        FirstName = newProfile.FirstName;
-        LastName = newProfile.LastName;
-        DateOfBirth = newProfile.DateOfBirth;
-        BloodType = newProfile.BloodType;
+        FirstName = firstName;
+        LastName = lastName;
+        DateOfBirth = dateOfBirth;
+        BloodType = bloodType;
+    }
+
+    public void SetPrescriptions(IEnumerable<Prescription> prescriptions)
+    {
+        _prescriptions.Clear();
+        _prescriptions.AddRange(prescriptions);
     }
 }

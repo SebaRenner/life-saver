@@ -1,9 +1,7 @@
 ﻿namespace LifeSaver.Domain.Prescriptions;
 
-public class Prescription
+public record Prescription
 {
-    public required Guid Id { get; init; }
-
     public required string MedicationName { get; set; }
 
     public required decimal DosageAmount { get; set; }
