@@ -32,7 +32,21 @@ Content-Type: application/json
   "firstName": "Max",
   "lastName": "Muster",
   "dateOfBirth": "1990-01-15",
-  "bloodType": "A_Positive"
+  "bloodType": "A_Positive",
+  "prescriptions": [
+    {
+      "medicationName": "Saridon neo 400mg",
+      "dosageAmount": 1,
+      "dosageUnit": "Tablet",
+      "dailySchedule": {
+        "morning": 0,
+        "afternoon": 1,
+        "evening": 0,
+        "night": 0
+      },
+      "indication": "Acute onset of debugging-induced headache, likely caused by a missing semicolon"
+    }
+  ]
 }
 
 ###

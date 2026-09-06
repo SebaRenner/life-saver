@@ -1,4 +1,5 @@
-﻿using LifeSaver.Domain.UserProfiles;
+﻿using LifeSaver.Domain.Prescriptions;
+using LifeSaver.Domain.UserProfiles;
 
 namespace LifeSaver.Application.UserProfiles;
 
@@ -7,5 +8,6 @@ public record UpdateUserProfileCommand(
     string? FirstName,
     string? LastName,
     DateOnly? DateOfBirth,
-    BloodType? BloodType
+    BloodType? BloodType,
+    IEnumerable<Prescription> Prescriptions
 );

@@ -14,7 +14,9 @@ public class UserProfileRepository : IUserProfileRepository
 
     public Task<UserProfile?> GetByIdAsync(string userId, CancellationToken cancellationToken = default)
     {
-        return _context.UserProfiles.FirstOrDefaultAsync(up => up.UserId == userId, cancellationToken);
+        return _context.UserProfiles
+            .Include(up => up.Prescriptions)
+            .FirstOrDefaultAsync(up => up.UserId == userId, cancellationToken);
     }
 
     public Task SaveAsync(UserProfile profile, CancellationToken cancellationToken = default)

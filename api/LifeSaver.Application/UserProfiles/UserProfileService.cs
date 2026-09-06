@@ -25,6 +25,8 @@ public class UserProfileService : IUserProfileService
 
         existingProfile.UpdateProfile(command.FirstName, command.LastName, command.DateOfBirth, command.BloodType);
 
+        existingProfile.SetPrescriptions(command.Prescriptions);
+
         await _repository.SaveAsync(existingProfile, cancellationToken);
 
         return existingProfile;

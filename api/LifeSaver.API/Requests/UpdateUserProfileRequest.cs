@@ -1,4 +1,5 @@
-﻿using LifeSaver.Domain.UserProfiles;
+﻿using LifeSaver.Domain.Prescriptions;
+using LifeSaver.Domain.UserProfiles;
 
 namespace LifeSaver.API.Requests;
 
@@ -11,4 +12,6 @@ public record UpdateUserProfileRequest
     public DateOnly? DateOfBirth { get; init; }
 
     public BloodType? BloodType { get; init; }
+
+    public IEnumerable<Prescription> Prescriptions { get; init; } = [];
 }
