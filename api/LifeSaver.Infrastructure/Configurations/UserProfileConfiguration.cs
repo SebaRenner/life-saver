@@ -30,5 +30,53 @@ public class UserProfileConfiguration : IEntityTypeConfiguration<UserProfile>
             "CK_UserProfile_BloodType",
             "\"BloodType\" IN ('A_Positive', 'A_Negative', 'B_Positive', 'B_Negative', 'AB_Positive', 'AB_Negative', 'O_Positive', 'O_Negative')"
         ));
+
+        builder.OwnsMany(x => x.Prescriptions, prescription =>
+        {
+            prescription.ToTable("Prescriptions");
+
+            // Shadow key — EF Core needs it, domain doesn't
+            prescription.Property<int>("Id");
+            prescription.HasKey("Id");
+
+            prescription.Property(p => p.MedicationName)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            prescription.Property(p => p.DosageAmount)
+                .IsRequired()
+                .HasPrecision(6, 3);
+
+            prescription.Property(p => p.DosageUnit)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(30);
+
+            prescription.Property(p => p.Indication)
+                .HasMaxLength(500);
+
+            prescription.OwnsOne(p => p.DailySchedule, schedule =>
+            {
+                schedule.Property(s => s.Morning)
+                    .IsRequired()
+                    .HasColumnName("ScheduleMorning")
+                    .HasPrecision(5, 2);
+
+                schedule.Property(s => s.Afternoon)
+                    .IsRequired()
+                    .HasColumnName("ScheduleAfternoon")
+                    .HasPrecision(5, 2);
+
+                schedule.Property(s => s.Evening)
+                    .IsRequired()       
+                    .HasColumnName("ScheduleEvening")
+                    .HasPrecision(5, 2);
+
+                schedule.Property(s => s.Night)
+                    .IsRequired()
+                    .HasColumnName("ScheduleNight")
+                    .HasPrecision(5, 2);
+            });
+        });
     }
 }
