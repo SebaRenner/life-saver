@@ -29,7 +29,10 @@
 
     <h2>Prescriptions</h2>
     @for (prescription of existingPrescriptions; track prescription.medicationName) {
-      <app-medication [prescription]="prescription" />
+      <app-medication 
+        [prescription]="prescription" 
+        (removePrescription)="onRemovePrescription($index)"
+      />
     }
 
     @for (row of newPrescriptionRows; track row) {

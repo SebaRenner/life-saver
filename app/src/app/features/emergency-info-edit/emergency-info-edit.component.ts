@@ -84,6 +84,11 @@ export class EmergencyInfoEditComponent implements OnInit {
     this.newPrescriptionRows.push(this.newPrescriptionRows.length);
   }
 
+  onRemovePrescription(index: number): void {
+    this.existingPrescriptions.splice(index, 1);
+    this.prescriptions.removeAt(index);
+  }
+
   private createPrescriptionGroup(prescription: Prescription): FormGroup {
     return this.fb.group({
       medicationName: [prescription.medicationName],

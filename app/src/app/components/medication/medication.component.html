@@ -53,8 +53,14 @@
     >
     </textarea>
   </mat-form-field>
-
-  <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || form.disabled">
-    Add medication
-  </button>
+  
+  @if (!form.disabled) {
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+      Add
+    </button>
+  } @else {
+    <button mat-stroked-button color="warn" type="button" (click)="removePrescription.emit()">
+      Remove
+    </button>
+  }
 </form>

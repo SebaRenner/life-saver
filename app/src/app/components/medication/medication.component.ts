@@ -20,6 +20,7 @@ export class MedicationComponent implements OnInit {
 
   prescription = input<Prescription>();
   addPrescription = output<Prescription>();
+  removePrescription = output<void>();
 
   form = this.fb.group({
     medicationName: [null as string | null, Validators.required],
