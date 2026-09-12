@@ -96,6 +96,7 @@ export class EmergencyInfoEditComponent implements OnInit {
         lastName: lastName ?? undefined,
         dateOfBirth: dateOfBirth ? format(new Date(dateOfBirth), 'yyyy-MM-dd') : undefined,
         bloodType: bloodType ?? undefined,
+        prescriptions: []
       };
 
       this.userProfileService.update(userId!, updateRequest).subscribe();
