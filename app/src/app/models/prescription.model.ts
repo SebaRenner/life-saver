@@ -19,6 +19,20 @@ export enum DosageUnit {
   Application = 'Application',
 }
 
+export const DosageUnitLabels: Record<DosageUnit, string> = {
+  [DosageUnit.Milligram]: 'mg',
+  [DosageUnit.Tablet]: 'Tablet',
+  [DosageUnit.Capsule]: 'Capsule',
+  [DosageUnit.Milliliter]: 'ml',
+  [DosageUnit.Microgram]: 'mcg',
+  [DosageUnit.InternationalUnit]: 'IU',
+  [DosageUnit.Puff]: 'Puff',
+  [DosageUnit.Drops]: 'Drops',
+  [DosageUnit.Gram]: 'g',
+  [DosageUnit.Patch]: 'Patch',
+  [DosageUnit.Application]: 'Application',
+};
+
 export interface Prescription {
     medicationName: string;
     dosageAmount: number;

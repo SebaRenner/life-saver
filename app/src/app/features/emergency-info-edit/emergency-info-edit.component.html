@@ -29,7 +29,7 @@
 
     <h2>Medications</h2>
     @for (row of medicationRows; track row) {
-      <app-medication (addMedication)="onMedicationAdded($event)" />
+      <app-medication (addPrescription)="onPrescriptionAdded($event)" />
     }
 
     <div class="actions">

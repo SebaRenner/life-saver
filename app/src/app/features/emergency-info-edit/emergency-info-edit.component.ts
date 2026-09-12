@@ -3,7 +3,6 @@ import { BloodTypeSelectComponent } from '../../components/blood-type-select/blo
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MedicationComponent } from '../../components/medication/medication.component';
-import { Medication } from '../../models/medication.model';
 import { QrCodeService } from '../../services/qr-code.service';
 import { StlService } from '../../services/stl.service';
 import { downloadBlob } from '../../utils/download.utils';
@@ -17,6 +16,7 @@ import { UserProfileUpdateRequest } from '../../models/user-profile.model';
 import { format } from 'date-fns';
 import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { BloodType } from '../../models/blood-type.model';
+import { Prescription } from '../../models/prescription.model';
 
 @Component({
   selector: 'app-emergency-info-edit',
@@ -72,18 +72,18 @@ export class EmergencyInfoEditComponent implements OnInit {
     }
   }
 
-  onMedicationAdded(medication: Medication): void {
-    this.medications.push(this.createMedicationGroup(medication));
+  onPrescriptionAdded(prescription: Prescription): void {
+    this.medications.push(this.createMedicationGroup(prescription));
     this.medicationRows.push(this.medicationRows.length);
   }
 
-  private createMedicationGroup(medication: Medication): FormGroup {
+  private createMedicationGroup(prescription: Prescription): FormGroup {
     return this.fb.group({
-      name: [medication.name],
-      dosage: [medication.dosage],
-      unit: [medication.unit],
-      frequency: [medication.frequency],
-      reason: [medication.reason],
+      name: [prescription.medicationName],
+      dosage: [prescription.dosageAmount],
+      unit: [prescription.dosageUnit],
+      frequency: [prescription.dailySchedule],
+      reason: [prescription.indication],
     });
   }
 
