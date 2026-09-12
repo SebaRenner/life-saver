@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DosageUnit, DosageUnitLabels, Prescription } from '../../models/prescription.model';
 import { MatInputModule } from '@angular/material/input';
@@ -12,26 +12,35 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './medication.component.html',
   styleUrl: './medication.component.scss',
 })
-export class MedicationComponent {
+export class MedicationComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   protected readonly maxIndicationLength = 400;
   protected readonly dosageUnits = Object.values(DosageUnit);
   protected readonly dosageUnitLabels = DosageUnitLabels;
 
+  prescription = input<Prescription>();
   addPrescription = output<Prescription>();
 
   form = this.fb.group({
-    medicationName: [null, Validators.required],
-    dosageAmount: [null, Validators.required],
-    dosageUnit: [null, Validators.required],
+    medicationName: [null as string | null, Validators.required],
+    dosageAmount: [null as number | null, Validators.required],
+    dosageUnit: [null as DosageUnit | null, Validators.required],
     dailySchedule: this.fb.group({
       morning: [0, [Validators.required, Validators.min(0)]],
       afternoon: [0, [Validators.required, Validators.min(0)]],
       evening: [0, [Validators.required, Validators.min(0)]],
       night: [0, [Validators.required, Validators.min(0)]],
     }),
-    indication: [null, Validators.maxLength(this.maxIndicationLength)],
+    indication: [null as string | null, Validators.maxLength(this.maxIndicationLength)],
   });
+
+  ngOnInit(): void {
+    const prescription = this.prescription();
+    if (prescription) {
+      this.form.patchValue(prescription);
+      this.form.disable();
+    }
+  }
 
   onSubmit(): void {
     if (this.form.valid) {

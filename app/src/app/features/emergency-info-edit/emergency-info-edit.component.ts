@@ -48,13 +48,14 @@ export class EmergencyInfoEditComponent implements OnInit {
     lastName: [null as string | null, Validators.maxLength(100)],
     dateOfBirth: [null as string | null],
     bloodType: [null as BloodType | null],
-    medications: this.fb.array([]),
+    prescriptions: this.fb.array([]),
   });
 
-  medicationRows = [0];
+  existingPrescriptions: Prescription[] = [];
+  newPrescriptionRows: number[] = [0];
 
-  get medications(): FormArray {
-    return this.form.get('medications') as FormArray;
+  get prescriptions(): FormArray {
+    return this.form.get('prescriptions') as FormArray;
   }
 
   ngOnInit(): void {
@@ -67,36 +68,47 @@ export class EmergencyInfoEditComponent implements OnInit {
           dateOfBirth: userProfile.dateOfBirth,
           bloodType: userProfile.bloodType,
         });
+
+        this.existingPrescriptions = userProfile.prescriptions ?? [];
+        this.existingPrescriptions.forEach((prescription) => {
+          this.prescriptions.push(this.createPrescriptionGroup(prescription));
+        });
+
         this.isLoading.set(false);
       });
     }
   }
 
   onPrescriptionAdded(prescription: Prescription): void {
-    this.medications.push(this.createMedicationGroup(prescription));
-    this.medicationRows.push(this.medicationRows.length);
+    this.prescriptions.push(this.createPrescriptionGroup(prescription));
+    this.newPrescriptionRows.push(this.newPrescriptionRows.length);
   }
 
-  private createMedicationGroup(prescription: Prescription): FormGroup {
+  private createPrescriptionGroup(prescription: Prescription): FormGroup {
     return this.fb.group({
-      name: [prescription.medicationName],
-      dosage: [prescription.dosageAmount],
-      unit: [prescription.dosageUnit],
-      frequency: [prescription.dailySchedule],
-      reason: [prescription.indication],
+      medicationName: [prescription.medicationName],
+      dosageAmount: [prescription.dosageAmount],
+      dosageUnit: [prescription.dosageUnit],
+      dailySchedule: this.fb.group({
+        morning: [prescription.dailySchedule.morning],
+        afternoon: [prescription.dailySchedule.afternoon],
+        evening: [prescription.dailySchedule.evening],
+        night: [prescription.dailySchedule.night],
+      }),
+      indication: [prescription.indication],
     });
   }
 
   onSubmit(): void {
     if (this.form.valid) {
       const userId = this.authStore.userId();
-      const { firstName, lastName, dateOfBirth, bloodType } = this.form.value;
+      const { firstName, lastName, dateOfBirth, bloodType, prescriptions } = this.form.value;
       const updateRequest: UserProfileUpdateRequest = {
         firstName: firstName ?? undefined,
         lastName: lastName ?? undefined,
         dateOfBirth: dateOfBirth ? format(new Date(dateOfBirth), 'yyyy-MM-dd') : undefined,
         bloodType: bloodType ?? undefined,
-        prescriptions: []
+        prescriptions: (prescriptions as Prescription[]) ?? [],
       };
 
       this.userProfileService.update(userId!, updateRequest).subscribe();

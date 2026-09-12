@@ -27,8 +27,12 @@
     <h2>Blood Type</h2>
     <app-blood-type-select formControlName="bloodType" />
 
-    <h2>Medications</h2>
-    @for (row of medicationRows; track row) {
+    <h2>Prescriptions</h2>
+    @for (prescription of existingPrescriptions; track prescription.medicationName) {
+      <app-medication [prescription]="prescription" />
+    }
+
+    @for (row of newPrescriptionRows; track row) {
       <app-medication (addPrescription)="onPrescriptionAdded($event)" />
     }
 
