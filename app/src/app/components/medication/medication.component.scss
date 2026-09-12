@@ -1,14 +1,21 @@
 form {
   display: grid;
-  grid-template-columns: 2fr 1fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: 1rem;
   align-items: baseline;
 }
 
 .mandatory-fields {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 2fr;
+  grid-template-columns: 2fr 0.5fr 0.75fr auto;
   gap: 1rem;
+  align-items: center;
+}
+
+.daily-schedule {
+  display: grid;
+  grid-template-columns: repeat(4, 95px);
+  gap: 0.5rem;
   align-items: center;
 }
 

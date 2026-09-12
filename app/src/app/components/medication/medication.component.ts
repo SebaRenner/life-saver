@@ -24,7 +24,12 @@ export class MedicationComponent {
     medicationName: [null, Validators.required],
     dosageAmount: [null, Validators.required],
     dosageUnit: [null, Validators.required],
-    frequency: [null, Validators.required],
+    dailySchedule: this.fb.group({
+      morning: [0, [Validators.required, Validators.min(0)]],
+      afternoon: [0, [Validators.required, Validators.min(0)]],
+      evening: [0, [Validators.required, Validators.min(0)]],
+      night: [0, [Validators.required, Validators.min(0)]],
+    }),
     indication: [null, Validators.maxLength(this.maxIndicationLength)],
   });
 
