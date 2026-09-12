@@ -36,7 +36,10 @@
     }
 
     @for (row of newPrescriptionRows; track row) {
-      <app-medication (addPrescription)="onPrescriptionAdded($event)" />
+      <app-medication 
+        (addPrescription)="onPrescriptionAdded($event)" 
+        (removePrescription)="onRemoveNewPrescriptionRow($index)"
+      />
     }
 
     <div class="actions">
