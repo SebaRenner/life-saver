@@ -13,7 +13,7 @@
   </div>
 
   @for (prescription of profile().prescriptions; track prescription.medicationName) {
-    
+    <app-prescription-display [prescription]="prescription"></app-prescription-display>
   }
 }
 <div class="section-header">

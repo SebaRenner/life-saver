@@ -1,0 +1,27 @@
+<div class="top">
+  <span class="name">{{ prescription().medicationName }}</span>
+  <span class="unit">{{ prescription().dosageAmount }}  {{ prescription().dosageUnit }}</span>
+</div>
+
+@if (prescription().indication) {
+  <div class="indication">{{ prescription().indication }}</div>
+}
+
+<div class="schedule">
+  <div class="slot" [class.active]="prescription().dailySchedule.morning > 0">
+    <span class="slot-label">Morn</span>
+    <span class="slot-value">{{ prescription().dailySchedule.morning || '—' }}</span>
+  </div>
+  <div class="slot" [class.active]="prescription().dailySchedule.afternoon > 0">
+    <span class="slot-label">Noon</span>
+    <span class="slot-value">{{ prescription().dailySchedule.afternoon || '—' }}</span>
+  </div>
+  <div class="slot" [class.active]="prescription().dailySchedule.evening > 0">
+    <span class="slot-label">Eve</span>
+    <span class="slot-value">{{ prescription().dailySchedule.evening || '—' }}</span>
+  </div>
+  <div class="slot" [class.active]="prescription().dailySchedule.night > 0">
+    <span class="slot-label">Night</span>
+    <span class="slot-value">{{ prescription().dailySchedule.night || '—' }}</span>
+  </div>
+</div>
