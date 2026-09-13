@@ -7,12 +7,12 @@ import { MatButton } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-  selector: 'app-medication',
+  selector: 'app-prescription',
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButton],
-  templateUrl: './medication.component.html',
-  styleUrl: './medication.component.scss',
+  templateUrl: './prescription.component.html',
+  styleUrl: './prescription.component.scss',
 })
-export class MedicationComponent implements OnInit {
+export class PrescriptionComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   protected readonly maxIndicationLength = 400;
   protected readonly dosageUnits = Object.values(DosageUnit);

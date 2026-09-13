@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { BloodTypeSelectComponent } from '../../components/blood-type-select/blood-type-select.component';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { MedicationComponent } from '../../components/medication/medication.component';
+import { PrescriptionComponent } from '../../components/prescription/prescription.component';
 import { QrCodeService } from '../../services/qr-code.service';
 import { StlService } from '../../services/stl.service';
 import { downloadBlob } from '../../utils/download.utils';
@@ -24,7 +24,7 @@ import { Prescription } from '../../models/prescription.model';
     ReactiveFormsModule,
     BloodTypeSelectComponent,
     MatButton,
-    MedicationComponent,
+    PrescriptionComponent,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
