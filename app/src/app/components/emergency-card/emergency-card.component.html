@@ -6,3 +6,17 @@
   <div class="dob">Born {{ profile().dateOfBirth }} · {{ profile().dateOfBirth | age }} yrs</div>
 }
 <app-blood-type-display [bloodType]="profile().bloodType"></app-blood-type-display>
+@if (profile().prescriptions.length > 0) {
+  <div class="section-header">
+    <span class="section-title">Prescriptions</span>
+    <hr>
+  </div>
+
+  @for (prescription of profile().prescriptions; track prescription.medicationName) {
+    
+  }
+}
+<div class="section-header">
+  <span class="section-title">Emergency Contacts</span>
+  <hr>
+</div>
